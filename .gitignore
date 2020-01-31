@@ -128,9 +128,16 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# onlysource-hy
+# onlysource_Windows-HY
 .vscode/
 Include/
 Lib/
 Scripts/
+pyvenv.cfg
+
+# onlysource_IOS-HY
+.vscode/
+bin/
+include/
+lib/
 pyvenv.cfg
