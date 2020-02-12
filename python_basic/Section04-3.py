@@ -18,7 +18,7 @@ print(e[-1][-2])
 print(f[2])
 
 # 슬라이싱
-print(f[0:3])
+print(f[0:2])
 print(e[0:len(e)])
 
 # 연산
@@ -31,14 +31,14 @@ print(str(c) + 'hi')
 c[0] = 77
 print(c)
 
-c[1:2] = [100, 1000, 1000]
+c[1:3] = [100, 1000, 1000]
 print(c)
 c[1] = ['a', 'b', 'c']
 print(c)
 
 del c[1]
 print(c)
-del c[1:2]
+del c[1:3]
 print(c)
 
 print()
