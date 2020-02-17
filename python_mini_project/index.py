@@ -9,6 +9,7 @@ class MiniProject:
     productTypeList = [1, 1, 2, 2, 2, 3, 3, 2, 1, 2, 4, 4]
     productTypeNameList = ['Outer', 'Top', 'Bottom', 'Pajama']
     productColorList = ['Gray', 'Black', 'White']
+    productColorIdList = [1, 2, 3]
 
     def __init__(self):
         self.conn = db.connect('./myShop.db', isolation_level=None)
@@ -16,17 +17,17 @@ class MiniProject:
 
     # 테이블 생성 (product, order)
     def createTables(self):
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS product_type(type_id INTEGER PRIMARY KEY AUTOINCREMENT, type_name TEXT NOT NULL")
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS product_color(color_id INTEGER PRIMARY KEY AUTOINCREMENT, color_name TEXT NOT NULL")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS product_type(type_id INTEGER PRIMARY KEY AUTOINCREMENT, type_name TEXT NOT NULL)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS product_color(color_id INTEGER PRIMARY KEY AUTOINCREMENT, color_name TEXT NOT NULL)")
         self.cursor.execute("CREATE TABLE IF NOT EXISTS products(product_id INTEGER PRIMARY KEY AUTOINCREMENT, product_name TEXT NOT NULL, product_price INTEGER NOT NULL, type_id INTEGER NOT NULL, color_id INTEGER, FOREIGN KEY(type_id) REFERENCES product_type(type_id), FOREIGN KEY(color_id) REFERENCES product_color(color_id))") 
         self.cursor.execute("CREATE TABLE IF NOT EXISTS orders(order_id INTEGER PRIMARY KEY AUTOINCREMENT, order_date TEXT NOT NULL, order_number INTEGER NOT NULL, order_price INTEGER NOT NULL, product_id INTEGER NOT NULL, FOREIGN KEY(product_id) REFERENCES products(id))")
     
     # 상품 종류, 색상 DB 생성
     def initProductTypeColor(self):
         for i in range(1, len(self.productTypeNameList) + 1):
-            self.cursor.execute("INSERT INTO product_type('type_id', 'type_name') VALUES(?, ?)", (i, self.productTypeNameList[i]))
+            self.cursor.execute("INSERT INTO product_type('type_id', 'type_name') VALUES(?, ?)", (i, self.productTypeNameList[i-1]))
         for i in range(1, len(self.productColorList) + 1):
-            self.cursor.execute("INSERT INTO product_type('color_id', 'color_name') VALUES(?, ?)", (i, self.productColorList[i]))
+            self.cursor.execute("INSERT INTO product_color('color_id', 'color_name') VALUES(?, ?)", (i, self.productColorList[i-1]))
     
     # 상품 DB 생성
     def insertProduct(self):
@@ -34,8 +35,8 @@ class MiniProject:
             if (self.productTypeList[i] == 1 or self.productTypeList[i] == 4): # 아우터와 잠옷은 색상종류가 없다.
                 self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type_id') VALUES(?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i]))
             else:
-                for j in range(0, len(self.productColorList)):
-                    self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type_id', 'color_id') VALUES(?, ?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i], self.productColorList[j]))
+                for j in range(0, len(self.productColorIdList)):
+                    self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type_id', 'color_id') VALUES(?, ?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i], self.productColorIdList[j]))
     
     # 데이터 세팅
     def initData(self):
@@ -113,15 +114,28 @@ class MiniProject:
         orderProductId = int(input())
         print("수량 : ")
         orderProductNumber = int(input())
-        nowDate = datetime.datetime.now().strftime('$Y-%m-$D %H:%M:%S')
-        orderProductPrice = self.cursor.execute("SELECT product_price FROM products WHERE product_id = ?", (orderProductId,))[0]
+        nowDate = datetime.datetime.now().strftime('%Y-%m-%D %H:%M:%S')
+        self.cursor.execute("SELECT product_price FROM products WHERE product_id = ?", (orderProductId,))
+        orderProductPrice = self.cursor.fetchall()[0][0]
+        print(orderProductPrice)
+        print(type(orderProductPrice))
         orderPrice = orderProductNumber * orderProductPrice
         self.cursor.execute("INSERT INTO orders('order_date', 'order_number', 'order_price', 'product_id') VALUES(?, ?, ?, ?)", (nowDate, orderProductNumber, orderPrice, orderProductId))
 
     # 구매 내역 보기
     def showOrder(self):
-        print("현재까지의 주문 내역을 확인합니다.")
-        
+         print("현재까지의 주문 내역을 확인합니다.")
+         self.cursor.execute("SELECT orders.order_id, orders.order_date, orders.order_number, orders.order_price, orders.product_id, products.product_name FROM orders INNER JOIN products ON orders.product_id = products.product_id")
+         orderList = self.cursor.fetchall()
+         for orders in orderList:
+             orderId = orders[0]
+             orderDate = orders[1]
+             orderNumber = orders[2]
+             orderPrice = orders[3]
+             productId = orders[4]
+             productName = orders[5]
+
+             print("{} {} {} {} {} {}".format(orderId, orderDate, orderNumber, orderPrice, productId, productName))
 
 ## 데이터베이스를 연결하는 코드
 miniProject = MiniProject()
@@ -168,4 +182,3 @@ try:
             continue
 except Exception as ex:
     print("예기치 못한 오류로 종료되었습니다. 다시 실행해주세요")
-
