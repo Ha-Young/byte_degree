@@ -110,13 +110,18 @@ class MiniProject:
     def orderProduct(self):
         print("구매하실 상품의 번호와 수량을 입력해주세요")
         print("상품 번호 : ")
-        orderProductId = input()
+        orderProductId = int(input())
         print("수량 : ")
-        orderProductNumber = input()
+        orderProductNumber = int(input())
+        nowDate = datetime.datetime.now().strftime('$Y-%m-$D %H:%M:%S')
+        orderProductPrice = self.cursor.execute("SELECT product_price FROM products WHERE product_id = ?", (orderProductId,))[0]
+        orderPrice = orderProductNumber * orderProductPrice
+        self.cursor.execute("INSERT INTO orders('order_date', 'order_number', 'order_price', 'product_id') VALUES(?, ?, ?, ?)", (nowDate, orderProductNumber, orderPrice, orderProductId))
 
     # 구매 내역 보기
     def showOrder(self):
-        pass
+        print("현재까지의 주문 내역을 확인합니다.")
+        
 
 ## 데이터베이스를 연결하는 코드
 miniProject = MiniProject()
@@ -130,32 +135,37 @@ miniProject.initData()
 ## 상품 목록을 표시하는 코드
 input("구르딩딩의 홈쇼핑에 오신것을 환영합니다~ Enter 키를 눌러주세요!")    # Enter Game Start!
 
-while True:
-    print("원하는 기능의 아래 숫자를 입력해주세요")
-    print('1. 상품 검색하여 보기')
-    print('2. 전체 상품 보기')
-    print('3. 바로 구매하기')
-    print('4. 현재까지 구매한 내역 보기')
-    print('5. 접속 종료하기')
+# 홈쇼핑 시작
+try:
+    while True:
+        print("원하는 기능의 아래 숫자를 입력해주세요")
+        print('1. 상품 검색하여 보기')
+        print('2. 전체 상품 보기')
+        print('3. 바로 구매하기')
+        print('4. 현재까지 구매한 내역 보기')
+        print('5. 접속 종료하기')
 
-    inputMenu = input()
-    print()
+        inputMenu = input()
+        print()
 
-    if inputMenu == "1":
-        miniProject.searchProduct()
-        continue
-    elif inputMenu == "2":
-        miniProject.showProduct()
-        continue
-    elif inputMenu == "3":
-        miniProject.orderProduct()
-        continue
-    elif inputMenu == "4":
-        miniProject.showOrder()
-        continue
-    elif inputMenu == "5":
-        print("구르딩딩의 홈쇼핑을 이용해주셔서 감사합니다. 다음에 또 방문해주세요~")
-        break
-    else:
-        print("잘못된 명령어를 입력하셨습니다.")
-        continue
+        if inputMenu == "1":
+            miniProject.searchProduct()
+            continue
+        elif inputMenu == "2":
+            miniProject.showProduct()
+            continue
+        elif inputMenu == "3":
+            miniProject.orderProduct()
+            continue
+        elif inputMenu == "4":
+            miniProject.showOrder()
+            continue
+        elif inputMenu == "5":
+            print("구르딩딩의 홈쇼핑을 이용해주셔서 감사합니다. 다음에 또 방문해주세요~")
+            break
+        else:
+            print("잘못된 명령어를 입력하셨습니다.")
+            continue
+except Exception as ex:
+    print("예기치 못한 오류로 종료되었습니다. 다시 실행해주세요")
+
