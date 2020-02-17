@@ -4,27 +4,44 @@ import datetime
 
 # ================ 선언부 =================
 class MiniProject:
-    productNameList = ['타이탄 체크 자켓', '세미오버 트렌치 코트', '베이직 울 니트', '프리미엄 케시미어 니트', '레이어 티셔츠', '울 슬렉스', '조거벤츠', '스탠다드 후드티', '스탠다드 후드 집업', '디즈니 프린팅 맨투맨', '팽수 파자마 세트', '토이스토리 우디 파자마 세트']
+    productNameList = ['Titan Check Jaket', 'Semiover Tranch Coat', 'Basic Wool Knit', 'Premium Cashmier Knit', 'Bent Layered T-Shirt', 'Wool Slacks', 'Jogger Pants', 'Standard Hood T-Shirt', 'Standard Hood Zipup', 'Printing Sweatshirt', 'Peng-Su Pajama Set', 'Toystory Woodie Pajama Set']
     productPriceList = [120000, 140000, 72000, 110000, 24000, 43000, 54000, 48000, 63000, 47000, 24000, 18000]
-    productTypeList = ['아우터', '아우터', '상의', '상의', '상의', '하의', '하의', '상의', '아우터', '상의', '잠옷', '잠옷']
+    productTypeList = [1, 1, 2, 2, 2, 3, 3, 2, 1, 2, 4, 4]
+    productTypeNameList = ['Outer', 'Top', 'Bottom', 'Pajama']
     productColorList = ['Gray', 'Black', 'White']
 
     def __init__(self):
         self.conn = db.connect('./myShop.db', isolation_level=None)
         self.cursor = self.conn.cursor()
+
     # 테이블 생성 (product, order)
     def createTables(self):
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS products(product_id INTEGER PRIMARY KEY AUTOINCREMENT, product_name TEXT NOT NULL, product_price INTEGER NOT NULL, type TEXT, colorType TEXT)") 
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS product_type(type_id INTEGER PRIMARY KEY AUTOINCREMENT, type_name TEXT NOT NULL")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS product_color(color_id INTEGER PRIMARY KEY AUTOINCREMENT, color_name TEXT NOT NULL")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS products(product_id INTEGER PRIMARY KEY AUTOINCREMENT, product_name TEXT NOT NULL, product_price INTEGER NOT NULL, type_id INTEGER NOT NULL, color_id INTEGER, FOREIGN KEY(type_id) REFERENCES product_type(type_id), FOREIGN KEY(color_id) REFERENCES product_color(color_id))") 
         self.cursor.execute("CREATE TABLE IF NOT EXISTS orders(order_id INTEGER PRIMARY KEY AUTOINCREMENT, order_date TEXT NOT NULL, order_number INTEGER NOT NULL, order_price INTEGER NOT NULL, product_id INTEGER NOT NULL, FOREIGN KEY(product_id) REFERENCES products(id))")
+    
+    # 상품 종류, 색상 DB 생성
+    def initProductTypeColor(self):
+        for i in range(1, len(self.productTypeNameList) + 1):
+            self.cursor.execute("INSERT INTO product_type('type_id', 'type_name') VALUES(?, ?)", (i, self.productTypeNameList[i]))
+        for i in range(1, len(self.productColorList) + 1):
+            self.cursor.execute("INSERT INTO product_type('color_id', 'color_name') VALUES(?, ?)", (i, self.productColorList[i]))
+    
     # 상품 DB 생성
     def insertProduct(self):
         for i in range(0, len(self.productNameList)):
-            if (self.productTypeList[i] == '아우터' or self.productTypeList[i] == '잠옷'):
-                self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type') VALUES(?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i]))
+            if (self.productTypeList[i] == 1 or self.productTypeList[i] == 4): # 아우터와 잠옷은 색상종류가 없다.
+                self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type_id') VALUES(?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i]))
             else:
                 for j in range(0, len(self.productColorList)):
-                    self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type', 'colorType') VALUES(?, ?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i], self.productColorList[j]))
-
+                    self.cursor.execute("INSERT INTO products('product_name', 'product_price', 'type_id', 'color_id') VALUES(?, ?, ?, ?)", (self.productNameList[i], self.productPriceList[i], self.productTypeList[i], self.productColorList[j]))
+    
+    # 데이터 세팅
+    def initData(self):
+        self.initProductTypeColor()
+        self.insertProduct()
+    
     # 상품 출력
     def printProducts(self, productList):
         print("{:^10}{:^50}{:^20}{:^20}{:^20}".format("number", "name", "price", "type", "color"))
@@ -54,22 +71,22 @@ class MiniProject:
             self.printProducts(searchProducts)
             
         elif inputValue == "2":
-            print("상품 타입을 입력해주세요 (아우터, 상의, 하의, 잠옷) : ")
-            searchProductType = input()
-            if searchProductType != "아우터" and searchProductType != "상의" and searchProductType != "하의" and searchProductType != "잠옷":
+            print("상품 타입을 입력해주세요 (아우터 : 1, 상의 : 2, 하의 : 3, 잠옷 : 4) : ")
+            searchProductType = int(input())
+            if searchProductType < 1 or searchProductType > 4:
                 print("상품 타입을 잘못입력하셨습니다.")
                 return
-            self.cursor.execute("SELECT * FROM products WHERE type = ?", (searchProductType,))
+            self.cursor.execute("SELECT * FROM products WHERE type_id = ?", (searchProductType,))
             searchProducts = self.cursor.fetchall()
             self.printProducts(searchProducts)
 
         elif inputValue == "3":
-            print("상품 컬러를 입력해주세요 (Gray, Black, White) : ")
-            searchProductColor = input()
-            if searchProductColor != "Gray" or searchProductColor != "Black" or searchProductColor != "White":
+            print("상품 컬러를 입력해주세요 (회색 : 1, 검은색 : 2, 흰색 : 3) : ")
+            searchProductColor = int(input())
+            if searchProductColor < 1 or searchProductColor > 3:
                 print("상품 컬러를 잘못입력하셨습니다.")
                 return
-            self.cursor.execute("SELECT * FROM products WHERE colorType = ?", (searchProductColor,))
+            self.cursor.execute("SELECT * FROM products WHERE color_id = ?", (searchProductColor,))
             searchProducts = self.cursor.fetchall()
             self.printProducts(searchProducts)
 
@@ -108,7 +125,7 @@ miniProject = MiniProject()
 miniProject.createTables()
 
 ## 상품 데이터를 추가하는 코드 
-miniProject.insertProduct()
+miniProject.initData()
 
 ## 상품 목록을 표시하는 코드
 input("구르딩딩의 홈쇼핑에 오신것을 환영합니다~ Enter 키를 눌러주세요!")    # Enter Game Start!
