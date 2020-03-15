@@ -1,0 +1,8 @@
+/* google font Oxanium */
+@import url('https://fonts.googleapis.com/css?family=Oxanium:400,600,800|Quicksand:400,700&display=swap');
+/* reset css */
+@import "./reset.css";
+/* font */
+@import "./font.css";
+/* page css */
+@import "./index.css";
