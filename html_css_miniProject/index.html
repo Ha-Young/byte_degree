@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medium-Clone</title>
+    <!-- fontawsome 사용 -->
+    <script src="https://kit.fontawesome.com/112b878a37.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__wrapper">
+            <div class="header__column">
+                <a href="./index.html">
+                    <i class="fab fa-medium fa-3x"></i>
+                </a>
+            </div>
+            <div class="header__column">
+                <a>
+                    <span class="column__sign-in">Sign in</span>
+                </a>
+                <a>
+                    <span class="column__get-started btn">Get started</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        
+        <article class="article">
+            <h1 class="article__title">
+                프론트엔드란?
+            </h1>
+
+            <hr>
+
+            <div class="article__writter">
+                <div class="writter__column">
+                    <i class="fas fa-user"></i>
+                    <div class="writter__info">
+                        <div class="info__name">
+                            <span class="name">Hayoung Choi</span>
+                            <a>
+                                <div class="follow-btn btn">
+                                    Follow
+                                </div>
+                            </a>
+                        </div>
+                        <div class="info__date">
+                            March 08, 2020. 14 min read
+                        </div>
+                    </div>
+                </div>
+                <div class="writter__column">
+                    <a class="share-btn">
+                        <i class="far fa-bookmark"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="article__content">
+                <div class="content__subTitle">1.개요</div>
+                <img src="https://blog.inflearn.com/wp-content/uploads/2018/12/webfrontend.png" alt="">
+                <div class="content__content">웹 프로그래밍의 한 분야.
+                    <br><br>
+                    프론트엔드 개발자는 프론트엔드, 백엔드의 완전한 분리 구조를 지향하는 업무 스타일의 개발 방식으로써 프론트단의 비지니스 로직과 사용자 영역의 개발을 담당하는 사람이다. 이와 다른 방식의 업무 스타일 직군으로는 웹퍼블리셔(ui개발)와 개발자(서버 개발자)의 업무 분리 방식이 있다. 이 경우는 주로 서버사이드가 클라이언트를 감싸는 방식이다. MVC로 치면 View 부분에 해당하는 영역을 맡는다.
+                    <br><br>
+                    반대말은 백엔드.
+                    <br><br>
+                    <img src="https://i.pinimg.com/originals/cc/ba/72/ccba7244eb420a8a0faf640a146d048e.png" alt="">
+                </div>
+                <div class="content__subTitle">2.본문</div>
+                <div class="content__content">프론트엔드 개발자는 백엔드 API에서 가져온 데이터의 출력, 입력을 통한 비지니스 로직 구성과 사용자와 대화하는 사용자 인터페이스 부분을 작업하는 개발자를 말한다.
+                    <br><br>
+                    분별하기 헷갈리는 직종으로 웹 퍼블리셔가 있는데, 웹 퍼블리셔(해외에서는 UI 개발자로 불린다)는 HTML 중심이거나, 서버 사이드가 감싸는 구조 형태의 웹을 지향하는 웹 퍼블리셔와 개발자의 업무 스타일의 직군으로써 웹표준 반응형 웹과 UI를 만드는 디자인 쪽에 가깝기에 데이터 처리, 비즈니스 로직을 개발하진 않는다. 클라이언트 사이드 영역이기도 하지만, 프론트엔드 개발자는 프론트엔드, 백엔드의 완전한 분리 구조를 지향하는 업무 스타일의 직군으로써 웹 퍼블리셔와 같이 인터페이스의 디자인 관점도 있지만, 웹 퍼블리셔와 달리 DOM 조작이 아닌 컴포넌트 아키텍처와 데이터 상태의 변화로 처리하며, 이벤트나 서버와 API 통신해서 비지니스 로직을 어떻게 푸는 관점을 가장 중시한다.
+                    <br><br>
+                    <div class="content__hilight">
+                        중간 강조 말 입니다.
+                    </div>
+                    프론트엔드 개발자는 프론트 영역 전반과 서버에 대한 이해력을 필요로 한다. 프론트엔드 개발자가 담당하기도 하지만, 종종 업무 효율을 위해 디자인 영역(HTML, CSS)만 작업해주는 마크업 개발자가 따로 있는 경우도 있으며, 프론트엔드 개발자는 해당 작업 파일을 받아 포팅 작업을 하고, 프론트엔드 영역을 개발하게 된다. 즉 프론트엔드 개발자는 바닐라 JS와 HTTP 프로토콜, 웹팩 등이 중요하다고 볼 수 있다.
+                    <br><br>
+                    백엔드 개발자도 기존 개발자와 스펙이 조금 다르고, 백엔드의 뷰는 화면 개발이 아닌 API 개발이고, 백엔드 인증 처리도 따로 알아야 하며, 데이터베이스 분석과 API서버를 개발한다. 웹 퍼블리셔와 개발자로 나뉜 방식은 모든 호출을 서버에서 가져와야 했고, 컴포넌트화가 안되었지만, 프론트엔드와 백엔드로 나뉜 개발 방식은 서버의 컴퓨터와 사용자 컴퓨터가 http통신으로 데이터만 교환하고 완전히 분리 구조를 지향한다. 점점 데이터의 복잡성이 커지고, spa 및 재사용성이 중요함에 따라 각광받는 직종이다.
+                </div>
+                <div class="content__subTitle">3. 내가 습득할 프론트엔드 기술 스택</div>
+                <ul class="content__lists">
+                    <li class="content__list">인터넷 작동원리</li>
+                    <li class="content__list">HTML</li>
+                    <li class="content__list">CSS (flex box, grid, display, media query 등)</li>
+                    <li class="content__list">Java Script (문법, DOM조작, API fetch, Ajax, ES6, 스코프&프로토타입 등 개념)</li>
+                    <li class="content__list">버전관리 (Git, GitHub)</li>
+                    <li class="content__list">패키지 매니저 (npm, yarn)</li>
+                    <li class="content__list">CSS BEM, PreProcessor (sass, post css)</li>
+                    <li class="content__list">빌드도구 (npm scripts, Prettier, ESLint)</li>
+                    <li class="content__list">프레임워크 -> React.js</li>
+                    <li class="content__list">next.js</li>
+                    <li class="content__list">TypeScript</li>
+                    <li class="content__list">GraphQL -> Apollo</li>
+                    <li class="content__list">React Native</li>
+                    <li class="content__list">Electron</li>
+                    <li class="content__list">WASM</li>
+                    <li class="content__list">...</li>
+                </ul>
+            </div>
+        </article>
+
+        <section class="tags">
+            <div class="tags__wrapper">
+                <div class="tags__hash">
+                    <div class="hash__item tag-btn">Frontend</div>
+                    <div class="hash__item tag-btn">HTML</div>
+                    <div class="hash__item tag-btn">CSS</div>
+                    <div class="hash__item tag-btn">웹프론트엔드</div>
+                    <div class="hash__item tag-btn">프론트엔드</div>
+                </div>
+                <a href="#">
+                    <i class="fas fa-chevron-up"></i>
+                </a>
+            </div>
+            <div class="tags__like-share">
+                <div class="like-share__column">
+                    <div class="tumbs-up-wrapper like-btn">
+                        <i class="far fa-thumbs-up like-btn"></i>
+                    </div>
+                    <span>14.4K</span>
+                </div>
+                <div class="like-share__column">
+                    <i class="fab fa-twitter share-btn"></i>
+                    <i class="fab fa-linkedin share-btn"></i>
+                    <i class="fab fa-facebook-square share-btn"></i>
+                    <i class="far fa-bookmark share-btn"></i>                </div>
+            </div>
+            <hr>
+        </section>
+        
+        <section class="written-by">
+            <div class="written-by__wrapper">
+                <div class="written-by__writter">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="written-by__writter-info">
+                    <div class="writter-info__label">WRITTEN BY</div>
+                    <div class="writter-info__name">HaYoung Choi</div>
+                </div>
+            </div>
+            <div class="written-by__follow btn">Follow</div>
+        </section>
+    </main>
+    <div class="main-more-splitter"></div>
+    <section class="more">
+        <div class="more__wrapper">
+            <h2 class="more-title">More From Medium</h2>
+            <hr>
+            <div class="more__item">
+                <div class="more-item__info">
+                    <span class="related-reads">Related reads</span>
+                    <h4 class="more-item__title">FrontEnd Beginning Part 1</h4>
+                    <div class="more-item__wrapper">
+                        <div class="more-item__writter-info">
+                            <i class="fas fa-user"></i>
+                            <div class="writter-info__info-wrapper">
+                                <span class="info-wrapper__info__name">HaYoung Choi</span>
+                                <span class="info-wrapper__info__date">Jun 22, 2019. 8 min read</span>
+                            </div>
+                        </div>
+                        <div class="writter-info__like-share__wrapper">
+                            <div class="writter-info__like-share">
+                                <div class="writter-info__like">
+                                    <i class="far fa-thumbs-up"></i>
+                                    385
+                                </div>
+                                <i class="far fa-bookmark"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <img class="more-item__best-img" src="https://images.velog.io/images/pks787/profile/77fb42c0-3b71-11ea-9191-21e598b2bf1c/bfd663ec8fcd825c9200ee5a3d6496b3.png"/>
+            </div>
+            <div class="more__item">
+                <div class="more-item__info">
+                    <span class="related-reads">Related reads</span>
+                    <h4 class="more-item__title">FrontEnd Beginning Part 2</h4>
+                    <div class="more-item__wrapper">
+                        <div class="more-item__writter-info">
+                            <i class="fas fa-user"></i>
+                            <div class="writter-info__info-wrapper">
+                                <span class="info-wrapper__info__name">HaYoung Choi</span>
+                                <span class="info-wrapper__info__date">Jun 25, 2019. 14 min read</span>
+                            </div>
+                        </div>
+                        <div class="writter-info__like-share__wrapper">
+                            <div class="writter-info__like-share">
+                                <div class="writter-info__like">
+                                    <i class="far fa-thumbs-up"></i>
+                                    185
+                                </div>
+                                <i class="far fa-bookmark"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <img class="more-item__best-img" src="https://lh3.googleusercontent.com/proxy/OFjJ6epZZ81k-5i_l8liqG8CwQwksQHo0YsvxB81gZCQ88yRhvcsBmDdG-CYj4cvte6EeIdEQLjUYtai6twd8gGR20T2zTRHE27gmBP8lzpcw-yPF9XgMppqZR1tPtunCDgmlsq9sA">
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer__medium-info">
+            <div class="medium-info__item">
+                <span class="medium-info__title">
+                    Discover Medium
+                </span>
+                <div class="medium-info__content">
+                    Welcome to a place where words matter. On Medium, smart voices and original ideas take center stage - with no ads in sight. Watch
+                </div>
+            </div>
+            <div class="medium-info__item">
+                <span class="medium-info__title">
+                    Discover Medium
+                </span>
+                <div class="medium-info__content">
+                    Follow all the topics you care about, and we’ll deliver the best stories for you to your homepage and inbox. Explore
+                </div>
+            </div>
+            <div class="medium-info__item">
+                <span class="medium-info__title">
+                    Discover Medium
+                </span>
+                <div class="medium-info__content">
+                    Get unlimited access to the best stories on Medium — and support writers while you’re at it. Just $5/month. Upgrade
+                </div>
+            </div>
+        </div>
+        <div class="footer__real-footer-wrapper">
+            <div class="footer__real-footer">
+                <h3 class="real-footer__label">Medium</h3>
+            </div>
+            <div class="real-footer__menu">
+                <span class="menu__item">About</span>
+                <span class="menu__item">Help</span>
+                <span class="menu__item">Legal</span>
+            </div>
+        </div>
+        
+    </footer>
+
+    <!-- .more / .footer Hover 적용시 투명하게 하기 위해 맨 밑으로 내림. -->
+    <nav class="nav-like-share">
+        <div class="nav-like-share__wrapper"></div>
+        <div class="like">
+            <a>
+                <i class="far fa-thumbs-up"></i>
+            </a>
+            <span>
+                14.4K
+            </span>
+        </div>
+        <div class="share">
+            <a>
+                <i class="far fa-bookmark"></i>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>
