@@ -44,9 +44,17 @@ userList = (
 )
 
 c.executemany("INSERT INTO users(id, username, email, phone, website, regdate)\
-    VALUES (?,?,?,?,?,?)", userList);
+    VALUES (?,?,?,?,?,?)", userList)
 
 # 테이블 데이터 삭제
 # conn.execute("DELETE FROM users")
-print("users db deleted : ", conn.execute("DELETE FROM users").rowcount)
+# print("users db deleted : ", conn.execute("DELETE FROM users").rowcount)
 
+# 커밋 : isolation_level = None 일 경우 자동 반영(오토 커밋)
+# conn.commit()
+
+# 롤백
+# conn.rollback()
+
+# 접속 해제
+# conn.close()
