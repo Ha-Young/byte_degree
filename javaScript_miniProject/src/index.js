@@ -9,6 +9,6 @@ function myInclude(filePath) {
 
 console.log("구르딩딩이 만든 ToDo에 오신걸 환영합니다~!\n연락처 : hayeong28@naver.com");
 
-myInclude("/src/js/clock.js");
-myInclude("/src/js/name.js");
-myInclude("/src/js/toDo.js");
+myInclude("./js/clock.js");
+myInclude("./js/name.js");
+myInclude("./js/toDo.js");
