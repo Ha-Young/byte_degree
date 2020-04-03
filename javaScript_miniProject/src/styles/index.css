@@ -1,0 +1,112 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: 35vh;
+    /* padding-top: 20vh */
+    box-sizing: border-box;
+    transition: padding-top .5s linear;
+}
+
+h1 {
+    font-size: 3vw;
+    font-weight: 700;
+    margin: 1vw;
+    display: block;
+}
+h2 {
+    font-size: 2vw;
+    display: block;
+    margin: 1vw;
+}
+h3 {
+    font-size: 1.5vw;
+    display: block;
+    margin: 1vw;
+}
+
+input {
+    font-size: 1.1vw;
+    margin: 1vw;
+}
+
+li {
+    font-size: 1.3vw;
+    height: 30px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+
+li::before {
+    content: "∙";
+    margin-right: 3px;
+}
+
+.timeWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.nameWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toDoInputContainer {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.listContainer {
+    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    margin: 100px 0px 20px;
+}
+
+.lists {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lists:first-child {
+    border-right: 1px solid black;
+}
+
+
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 1px 2.5px;
+    margin-left: 3px;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0px;
+}

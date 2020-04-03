@@ -43,7 +43,11 @@ print(2 in b)
 # 집합(Sets) (순서x, 중복x)
 a = set()
 b = set([1, 2, 3, 4])
-c = set([1, 4, 5, 6, 6])
+c = set(1, 4, 5, 6, 6)
 
 print(type(a))
 print(c)
+
+
+for i in c:
+    print(i)
