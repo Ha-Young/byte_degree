@@ -2,6 +2,8 @@
 # Selenium
 # Selenium 사용 실습(2) - 실습프로젝트(1)
 
+# 다나와 노트북 Apple 제조사로 크롤링
+
 # selenium 임포트
 from selenium import webdriver
 import time
