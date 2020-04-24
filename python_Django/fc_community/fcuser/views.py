@@ -8,9 +8,10 @@ def register(request):
     if request.method == "GET":
         return render(request, 'register.html')
     elif request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        re_password = request.POST['re-password']
+        username = request.POST.get('username', None)
+        email = request.POST.get('email', None)
+        password = request.POST.get('password', None)
+        re_password = request.POST.get('re-password', None)
 
         res_data = {}
         if password != re_password:
@@ -18,6 +19,7 @@ def register(request):
         else:
             fcuser = Fcuser(
                 username=username,
+                email=email,
                 password=password
             )
 
