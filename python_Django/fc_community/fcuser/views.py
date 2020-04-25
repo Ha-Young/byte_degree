@@ -4,6 +4,20 @@ from .models import Fcuser
 
 # Create your views here.
 
+def login(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+        res_data = {}
+        if not (username and password):
+            res_data['error'] = '모든 값을 입력해야 합니다.'
+        else:
+            # Todo
+        return render(request, 'login.html')
+
 def register(request):
     if request.method == "GET":
         return render(request, 'register.html')
