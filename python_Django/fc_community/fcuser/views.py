@@ -6,23 +6,40 @@ from .models import Fcuser
 # Create your views here.
 
 
+def home(request):
+    user_id = request.session.get('user')
+
+    if user_id:
+        fcuser = Fcuser.objects.get(pk=user_id)
+        return HttpResponse(fcuser.username)
+
+    return HttpResponse("Home!")
+
+
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+
+    return redirect('/')
+
+
 def login(request):
     if request.method == "GET":
         return render(request, 'login.html')
     elif request.method == 'POST':
-        username = request.POST.get('username', None)
+        email = request.POST.get('email', None)
         password = request.POST.get('password', None)
+        print(email, password)
 
         res_data = {}
-        if not (username and password):
+        if not (email and password):
             res_data['error'] = '모든 값을 입력해야 합니다.'
         else:
-            fcuser = Fcuser.objects.get(username=username)
+            fcuser = Fcuser.objects.get(email=email)
+
             if check_password(password, fcuser.password):
-                return redirect('http://naver.com')
-                # 비밀번호 일치. 로그인 처리
-                # 세션
-                pass
+                request.session['user'] = fcuser.id
+                return redirect('/')
             else:
                 res_data['error'] = '비밀번호를 틀렸습니다.'
 
