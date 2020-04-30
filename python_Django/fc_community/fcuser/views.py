@@ -30,7 +30,7 @@ def login(request):
         if form.is_valid():
             # session
             return redirect('/')
-            
+
     else:
         form = LoginForm()
 

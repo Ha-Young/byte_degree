@@ -10,8 +10,11 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleanned_data = super().clean()
+        print(cleanned_data)
         email = cleanned_data.get('email')
         password = cleanned_data.get('password')
+        
+        print(email, password)
 
         if email and password:
             fcuser = Fcuser.objects.get(email=email)
