@@ -13,12 +13,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <th>제목 테스트입니다</th>
-                    <th>fcuser...</th>
-                    <th>2020-04-30 19:40:00</th>
-                </tr>
+                {% for board in boards %}
+                    <tr>
+                        <th>{{board.id}}</th>
+                        <th>{{board.title}}</th>
+                        <th>{{board.writer}}</th>
+                        <th>{{board.registered_dttm}}</th>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
