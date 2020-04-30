@@ -15,9 +15,11 @@ def home(request):
         return HttpResponse(fcuser.username)
 
     return HttpResponse("Home!")
-
-
+    
+    
 def logout(request):
+    print("logout")
+    print(request.session.get('user'))
     if request.session.get('user'):
         del(request.session['user'])
 
@@ -29,6 +31,7 @@ def login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             # session
+            request.session['user'] = form.user_id
             return redirect('/')
 
     else:

@@ -20,3 +20,5 @@ class LoginForm(forms.Form):
             fcuser = Fcuser.objects.get(email=email)
             if not check_password(password, fcuser.password):
                 self.add_error('password', '비밀번호를 틀렸습니다')
+            else:
+                self.user_id = fcuser.id
