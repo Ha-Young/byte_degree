@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Fcuser
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 # Create your views here.
 
@@ -42,23 +42,33 @@ def login(request):
 
 def register(request):
     if request.method == "GET":
-        return render(request, 'register.html')
+        form = RegisterForm()
+        return render(request, 'register.html', {'form': form})
     elif request.method == "POST":
-        username = request.POST.get('username', None)
-        email = request.POST.get('email', None)
-        password = request.POST.get('password', None)
-        re_password = request.POST.get('re-password', None)
-
         res_data = {}
-        if password != re_password:
-            res_data['error'] = '비밀번호가 다릅니다.'
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username', None)
+            email = request.POST.get('email', None)
+            password = request.POST.get('password', None)
+            re_password = request.POST.get('re_password', None)
+
+            if password != re_password:
+                res_data['error'] = '비밀번호가 다릅니다.'
+                return render(request, 'register.html', res_data, {'form':form})
+            else:
+                fcuser = Fcuser(
+                    username=username,
+                    email=email,
+                    password=make_password(password)
+                )
+
+                fcuser.save()
+
+                form = LoginForm()
+                return redirect('../login')
         else:
-            fcuser = Fcuser(
-                username=username,
-                email=email,
-                password=make_password(password)
-            )
+            return render(request, 'register.html', {'form':form})
+            
 
-            fcuser.save()
-
-        return render(request, 'register.html', res_data)
+        
