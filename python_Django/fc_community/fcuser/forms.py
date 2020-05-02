@@ -51,7 +51,11 @@ class LoginForm(forms.Form):
         print(email, password)
 
         if email and password:
-            fcuser = Fcuser.objects.get(email=email)
+            try:
+                fcuser = Fcuser.objects.get(email=email)
+            except Fcuser.DoesNotExist:
+                self.add_error('email', '아이디가 없습니다')
+                return
             if not check_password(password, fcuser.password):
                 self.add_error('password', '비밀번호를 틀렸습니다')
             else:
