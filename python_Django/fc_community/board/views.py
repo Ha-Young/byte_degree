@@ -10,7 +10,7 @@ from .forms import BoardForm
 def board_list(request):
     all_boards = Board.objects.all().order_by('-id')
     page = request.GET.get('p', 1)
-    paginator = Paginator(all_boards, 2)
+    paginator = Paginator(all_boards, 7)
 
     boards = paginator.get_page(page)
     
