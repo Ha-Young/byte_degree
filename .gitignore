@@ -144,3 +144,4 @@ pyvenv.cfg
 .DS_Store
 website_screenshot/
 *.xlsx
+*.zip
