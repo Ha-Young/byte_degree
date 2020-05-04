@@ -80,8 +80,20 @@
 - Selenium 사용 스크랩핑
 
 ## 파이썬 장고
+# [Site](http://hayeong.pythonanywhere.com/)
 - 웹프레임워크에 대한 이해
 - Django 프레임워크 시작하기
 - Django 프레임워크 구성
 - Django의 MVC패턴(MVT)
-- MTV의 M 만들기
+- MTV - Model
+- MTV - Template
+- Template inheritance
+- MTV - Views
+- Django Admin
+- static files (CDN info)
+- session
+- Django Form
+- User - login / join / logout
+- Board - list / write / add tag
+- Django deploy setting
+- Deploy to pythonanywhere
