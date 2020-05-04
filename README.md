@@ -80,7 +80,7 @@
 - Selenium 사용 스크랩핑
 
 ## 파이썬 장고
-# [Site](http://hayeong.pythonanywhere.com/)
+### [Site](http://hayeong.pythonanywhere.com/)
 - 웹프레임워크에 대한 이해
 - Django 프레임워크 시작하기
 - Django 프레임워크 구성
