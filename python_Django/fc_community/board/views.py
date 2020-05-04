@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 from django.core.paginator import Paginator
 from fcuser.models import Fcuser
+from tag.models import Tag
 from .models import Board
 from .forms import BoardForm
 # Create your views here.
@@ -28,11 +29,22 @@ def board_write(request):
             user_id = request.session.get('user')
             fcuser = Fcuser.objects.get(pk=user_id)
 
+            tags = request.POST.get('tags', None).split(',')
+
             board = Board()
             board.title = request.POST.get('title', None)
             board.contents = request.POST.get('contents', None)
             board.writer = fcuser
+
             board.save()
+
+            for tag in tags:
+                if not tag:
+                    continue
+                
+                _tag, _ = Tag.objects.get_or_create(name=tag)
+                board.tags.add(_tag)
+
 
             return redirect('../list/')
     else:

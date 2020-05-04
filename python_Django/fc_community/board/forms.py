@@ -11,3 +11,6 @@ class BoardForm(forms.Form):
         error_messages={
             'required': '내용을 입력해주십시오'
         })
+    tags = forms.CharField(
+        label="태그", required=False
+        )
