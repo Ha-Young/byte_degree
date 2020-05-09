@@ -31,7 +31,7 @@ def scrape_news_list_page(response):
 
     # 태그 정보 문자열 저장
     root = lxml.html.fromstring(response.content)
-
+    
     for a in root.cssselect('.api_list .api_item .api_link'):
         # 링크
         url = a.get('href')
